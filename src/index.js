@@ -27,7 +27,6 @@ import "./styles.css";
 
 function App() {
   const [loading] = useState(false);
-  const [] = useState("createStandardLayout");
   const [data] = useState({
     header: true,
     nav: true,
