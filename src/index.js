@@ -25,8 +25,6 @@ import FooterEx from "./components/FooterEx";
 
 import "./styles.css";
 
-// add presets.create{}() to config props in Root to change the behavior, looking and layout
-// <Root config={presets.createCozyLayout()}> ...
 function App() {
   const [loading] = useState(false);
   const [] = useState("createStandardLayout");

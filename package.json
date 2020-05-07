@@ -1,13 +1,13 @@
 {
-  "name": "material-ui-layout",
+  "name": "react-with-tresury-material",
   "version": "1.0.0",
-  "description": "Good news, mui-layout has been upgraded to @mui-treasury/layout with a lot of cool features coming!",
-  "keywords": ["dashboard", "material-ui", "layout", "react"],
+  "description": "",
+  "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "@material-ui/core": "4.6.0",
-    "@material-ui/icons": "4.5.1",
-    "@material-ui/styles": "4.6.0",
+    "@material-ui/core": "4.9.13",
+    "@material-ui/icons": "4.9.1",
+    "@material-ui/styles": "4.9.13",
     "@mui-treasury/layout": "3.3.4",
     "lodash": "4.17.15",
     "react": "16.13.1",
@@ -23,5 +23,10 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
