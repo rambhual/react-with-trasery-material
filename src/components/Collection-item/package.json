@@ -1,0 +1,5 @@
+{
+  "name": "Collection Item component",
+  "private": true,
+  "main": "./CollectionItem.component.js"
+}

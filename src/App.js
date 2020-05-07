@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Switch, Route } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -8,7 +8,6 @@ import {
   Header,
   Sidebar,
   Content,
-  Footer,
   CollapseBtn,
   CollapseIcon,
   SidebarTrigger,
@@ -18,15 +17,10 @@ import { defaultLayoutPreset } from "@mui-treasury/layout/presets";
 import NavContentEx from "./components/Layout/NavContentEx";
 import NavHeaderEx from "./components/Layout/NavHeaderEx";
 import HeaderEx from "./components/Layout/HeaderEx";
-import ContentEx from "./components/Layout/ContentEx";
-import FooterEx from "./components/Layout/FooterEx";
+import Home from "./pages/home";
+import { Container } from "@material-ui/core";
+import { ShopPage } from "./pages/shop/Shop.page";
 export function App() {
-  const [data] = useState({
-    header: true,
-    nav: true,
-    content: true,
-    footer: true,
-  });
   return (
     <Root config={defaultLayoutPreset}>
       {({ headerStyles, sidebarStyles }) => (
@@ -43,22 +37,27 @@ export function App() {
               <SidebarTrigger className={headerStyles.leftTrigger}>
                 <SidebarTriggerIcon />
               </SidebarTrigger>
-              {data.header && <HeaderEx />}
+              <HeaderEx />
             </Toolbar>
           </Header>
           <Content>
-            <Switch>
-              <Route path="/" exact>
-                {data.content && <ContentEx />}
-              </Route>
-            </Switch>
+            <Container>
+              <Switch>
+                <Route path="/" exact>
+                  <Home />
+                </Route>
+                <Route path="/shops" exact>
+                  <ShopPage />
+                </Route>
+              </Switch>
+            </Container>
           </Content>
           <Sidebar>
             {({ collapsed }) => (
               <>
                 <NavHeaderEx collapsed={collapsed} />
                 <div className={sidebarStyles.container}>
-                  {data.nav && <NavContentEx />}
+                  <NavContentEx />
                 </div>
                 <CollapseBtn className={sidebarStyles.collapseBtn}>
                   <CollapseIcon />
@@ -66,7 +65,6 @@ export function App() {
               </>
             )}
           </Sidebar>
-          <Footer>{data.footer && <FooterEx />}</Footer>
         </>
       )}
     </Root>
