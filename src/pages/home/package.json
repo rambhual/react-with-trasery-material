@@ -1,0 +1,5 @@
+{
+  "name": "Home Page",
+  "private": true,
+  "main": "./Home.page.js"
+}

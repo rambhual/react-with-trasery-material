@@ -1,0 +1,5 @@
+{
+  "name": "Directory Context",
+  "private": true,
+  "main": "./directory.context.js"
+}

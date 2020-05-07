@@ -10,12 +10,12 @@ const styles = ({ breakpoints }) => ({
     [breakpoints.up("sm")]: {
       padding: 24,
       maxWidth: 500,
-      margin: "auto"
+      margin: "auto",
     },
     [breakpoints.up("md")]: {
-      maxWidth: 700
-    }
-  }
+      maxWidth: 700,
+    },
+  },
 });
 
 const ContentEx = ({ classes }) => (
@@ -120,8 +120,5 @@ const ContentEx = ({ classes }) => (
     <br />
   </div>
 );
-
-ContentEx.propTypes = {};
-ContentEx.defaultProps = {};
 
 export default withStyles(styles)(ContentEx);
