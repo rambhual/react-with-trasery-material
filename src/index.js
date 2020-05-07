@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import {
@@ -13,7 +12,7 @@ import {
   CollapseBtn,
   CollapseIcon,
   SidebarTrigger,
-  SidebarTriggerIcon
+  SidebarTriggerIcon,
 } from "@mui-treasury/layout";
 import { defaultLayoutPreset } from "@mui-treasury/layout/presets";
 
@@ -26,25 +25,13 @@ import FooterEx from "./components/FooterEx";
 import "./styles.css";
 
 function App() {
-  const [loading] = useState(false);
   const [data] = useState({
     header: true,
     nav: true,
     content: true,
-    footer: true
+    footer: true,
   });
-  return loading ? (
-    <div
-      style={{
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-      }}
-    >
-      <Typography variant={"h2"}>Changing Preset...</Typography>
-    </div>
-  ) : (
+  return (
     <Root config={defaultLayoutPreset}>
       {({ headerStyles, sidebarStyles }) => (
         <>
