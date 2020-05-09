@@ -1,16 +1,20 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm } from "react-hook-form";
-
-const useStyles = makeStyles(() => ({
+import { signInWithGoogle } from "../../firebase";
+const useStyles = makeStyles((theme) => ({
   textField: {
     display: "flex",
     width: "49%",
     marginTop: "1em",
     justifyContent: "center",
+  },
+  button: {
+    margin: theme.spacing(1),
   },
 }));
 
@@ -58,6 +62,14 @@ const SignIn = () => {
         />
         <Button type="submit" variant="contained" color="primary">
           Sign In
+        </Button>
+        <Button
+          variant="contained"
+          className={classes.button}
+          startIcon={<ExitToAppIcon />}
+          onClick={signInWithGoogle}
+        >
+          Sign In with Google
         </Button>
       </form>
     </Box>

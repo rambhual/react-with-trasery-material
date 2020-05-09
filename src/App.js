@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -21,56 +21,75 @@ import Home from "./pages/home";
 import { Container } from "@material-ui/core";
 import { ShopPage } from "./pages/shop/Shop.page";
 import Authentication from "./pages/auth/auth.page";
-export function App() {
-  return (
-    <Root config={defaultLayoutPreset}>
-      {({ headerStyles, sidebarStyles }) => (
-        <>
-          <CssBaseline />
-          <Header>
-            <Toolbar>
-              <CollapseBtn
-                component={IconButton}
-                className={headerStyles.leftTrigger}
-              >
-                <CollapseIcon />
-              </CollapseBtn>
-              <SidebarTrigger className={headerStyles.leftTrigger}>
-                <SidebarTriggerIcon />
-              </SidebarTrigger>
-              <HeaderEx />
-            </Toolbar>
-          </Header>
-          <Content>
-            <Container>
-              <Switch>
-                <Route path="/" exact>
-                  <Home />
-                </Route>
-                <Route path="/shops" exact>
-                  <ShopPage />
-                </Route>
-                <Route path="/auth/login" exact>
-                  <Authentication />
-                </Route>
-              </Switch>
-            </Container>
-          </Content>
-          <Sidebar>
-            {({ collapsed }) => (
-              <>
-                <NavHeaderEx collapsed={collapsed} />
-                <div className={sidebarStyles.container}>
-                  <NavContentEx />
-                </div>
-                <CollapseBtn className={sidebarStyles.collapseBtn}>
+import { auth } from "./firebase";
+
+class App extends Component {
+  unSubscribe = null;
+  state = {
+    currentUser: null,
+  };
+  componentDidMount() {
+    this.unSubscribe = auth.onAuthStateChanged((user) => {
+      this.setState({ currentUser: user });
+      console.log(this.state.currentUser);
+    });
+  }
+  componentWillUnmount() {
+    this.unSubscribe();
+  }
+  render() {
+    return (
+      <Root config={defaultLayoutPreset}>
+        {({ headerStyles, sidebarStyles }) => (
+          <>
+            <CssBaseline />
+            <Header>
+              <Toolbar>
+                <CollapseBtn
+                  component={IconButton}
+                  className={headerStyles.leftTrigger}
+                >
                   <CollapseIcon />
                 </CollapseBtn>
-              </>
-            )}
-          </Sidebar>
-        </>
-      )}
-    </Root>
-  );
+                <SidebarTrigger className={headerStyles.leftTrigger}>
+                  <SidebarTriggerIcon />
+                </SidebarTrigger>
+                <HeaderEx currentUser={this.state.currentUser} />
+              </Toolbar>
+            </Header>
+            <Content>
+              <Container>
+                <Switch>
+                  <Route path="/" exact>
+                    <Home />
+                  </Route>
+                  <Route path="/shops" exact>
+                    <ShopPage />
+                  </Route>
+                  <Route path="/auth/login" exact>
+                    <Authentication />
+                  </Route>
+                </Switch>
+              </Container>
+            </Content>
+            <Sidebar>
+              {({ collapsed }) => (
+                <>
+                  <NavHeaderEx collapsed={collapsed} />
+                  <div className={sidebarStyles.container}>
+                    <NavContentEx />
+                  </div>
+                  <CollapseBtn className={sidebarStyles.collapseBtn}>
+                    <CollapseIcon />
+                  </CollapseBtn>
+                </>
+              )}
+            </Sidebar>
+          </>
+        )}
+      </Root>
+    );
+  }
 }
+
+export default App;

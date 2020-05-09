@@ -9,7 +9,7 @@ const HomePage = () => {
     <Fragment>
       <Grid container spacing={2}>
         {directory.map(({ id, ...otherProps }) => (
-          <Grid item xs={4} key={id}>
+          <Grid item xs={12} md={3} lg={4} key={id}>
             <MenuItem {...otherProps} />
           </Grid>
         ))}

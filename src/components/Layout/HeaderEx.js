@@ -6,7 +6,8 @@ import InputBase from "@material-ui/core/InputBase";
 import Icon from "@material-ui/core/Icon";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-
+import { Button } from "@material-ui/core";
+import { auth } from "../../firebase";
 const styles = ({ spacing, transitions, breakpoints, palette, shape }) => ({
   header: {
     fontWeight: 900,
@@ -61,12 +62,13 @@ const styles = ({ spacing, transitions, breakpoints, palette, shape }) => ({
   },
 });
 
-const HeaderEx = ({ classes, screen }) => (
+const HeaderEx = ({ classes, screen, currentUser }) => (
   <>
     <Typography noWrap color={"textSecondary"} className={classes.header}>
       Saint Gobain Easy Order
     </Typography>
     <div className={classes.grow} />
+
     <div className={classes.search}>
       <div className={classes.searchIcon}>
         <Icon>search</Icon>
@@ -79,6 +81,15 @@ const HeaderEx = ({ classes, screen }) => (
         }}
       />
     </div>
+    {currentUser ? (
+      <Button onClick={() => auth.signOut()}>Logout</Button>
+    ) : (
+      <>
+        <Button>Login</Button>
+        <Button>Register</Button>
+      </>
+    )}
+
     {screen === "xs" && (
       <IconButton>
         <Icon>more_vert</Icon>

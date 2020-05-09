@@ -1,34 +1,54 @@
 import React from "react";
+import cx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-
-const useStyles = makeStyles({
+import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
+import { useLightTopShadowStyles } from "@mui-treasury/styles/shadow/lightTop";
+const useStyles = makeStyles(() => ({
   root: {
-    minWidth: 275,
+    margin: "auto",
+    borderRadius: 0,
+    position: "relative",
   },
-  media: {
-    height: 0,
-    paddingTop: "56.25%", // 16:9
+  cta: {
+    display: "block",
+    textAlign: "center",
+    color: "#fff",
+    letterSpacing: "3px",
+    fontWeight: 200,
+    fontSize: 12,
   },
   title: {
-    fontSize: 14,
+    color: "#fff",
+    letterSpacing: "2px",
+    border: "3px solid #efe9e9",
+    padding: "5px",
   },
-});
+}));
 
 const MenuItem = ({ title, imageUrl }) => {
-  const classes = useStyles();
-
+  const styles = useStyles();
+  const mediaStyles = useCoverCardMediaStyles();
+  const shadowStyles = useLightTopShadowStyles();
   return (
-    <Card className={classes.root}>
-      <CardMedia className={classes.media} image={imageUrl} title={title} />
-      <CardContent>
-        <Typography variant="h5" component="h2">
-          {title.toUpperCase()}
-        </Typography>
-      </CardContent>
+    <Card className={cx(styles.root, shadowStyles.root)}>
+      <CardMedia classes={mediaStyles} image={imageUrl} />
+      <CardActionArea>
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          minHeight={200}
+          color={"common.white"}
+          textAlign={"center"}
+        >
+          <h1 className={styles.title}>{title}</h1>
+        </Box>
+      </CardActionArea>
     </Card>
   );
 };
