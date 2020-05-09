@@ -22,7 +22,7 @@ const CollectionItem = ({ title, items }) => {
           {items
             .filter((item, idx) => idx < 3)
             .map(({ id, ...otherProps }) => (
-              <Grid item xs={4} key={id}>
+              <Grid item xs={12} md={4} xl={6} key={id}>
                 <CollectionPreview {...otherProps} />
               </Grid>
             ))}

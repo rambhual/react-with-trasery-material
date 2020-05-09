@@ -1,0 +1,5 @@
+{
+  "name": "Sign Up component",
+  "private": true,
+  "main": "./sign-up.component.js"
+}

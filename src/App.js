@@ -20,6 +20,7 @@ import HeaderEx from "./components/Layout/HeaderEx";
 import Home from "./pages/home";
 import { Container } from "@material-ui/core";
 import { ShopPage } from "./pages/shop/Shop.page";
+import Authentication from "./pages/auth/auth.page";
 export function App() {
   return (
     <Root config={defaultLayoutPreset}>
@@ -48,6 +49,9 @@ export function App() {
                 </Route>
                 <Route path="/shops" exact>
                   <ShopPage />
+                </Route>
+                <Route path="/auth/login" exact>
+                  <Authentication />
                 </Route>
               </Switch>
             </Container>

@@ -1,0 +1,5 @@
+{
+  "name": "Authentication Page",
+  "private": true,
+  "main": "./auth.page.js"
+}

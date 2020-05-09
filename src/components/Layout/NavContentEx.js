@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -11,24 +11,20 @@ const list = [
   {
     primaryText: "Home",
     icon: "home",
+    route: "",
   },
   {
     primaryText: "Shop",
     icon: "people",
+    route: "shops",
   },
 ];
 
 const NavContentEx = () => {
-  const {
-    location: { pathname },
-  } = useHistory();
-  const isActive = (path) => {
-    return path === `${pathname}`;
-  };
   return (
     <List>
-      {list.map(({ primaryText, icon }, i) => (
-        <ListItem key={primaryText} button>
+      {list.map(({ primaryText, icon, route }, i) => (
+        <ListItem key={primaryText} button component={Link} to={`/${route}`}>
           <ListItemIcon>
             <Icon>{icon}</Icon>
           </ListItemIcon>
@@ -39,10 +35,7 @@ const NavContentEx = () => {
         </ListItem>
       ))}
       <Divider style={{ margin: "12px 0" }} />
-      <ListItem button>
-        <ListItemIcon>
-          <Icon>settings</Icon>
-        </ListItemIcon>
+      <ListItem button component={Link} to="/auth/login">
         <ListItemText
           primary={"Settings & account"}
           primaryTypographyProps={{ noWrap: true }}

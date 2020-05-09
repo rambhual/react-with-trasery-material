@@ -1,0 +1,5 @@
+{
+  "name": "Sign In component",
+  "private": true,
+  "main": "./sign-in.component.js"
+}
