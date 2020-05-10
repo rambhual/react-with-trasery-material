@@ -21,7 +21,7 @@ import Home from "./pages/home";
 import { Container } from "@material-ui/core";
 import { ShopPage } from "./pages/shop/Shop.page";
 import Authentication from "./pages/auth/auth.page";
-import { auth } from "./firebase";
+import { auth, createUserProfileDocument } from "./firebase";
 
 class App extends Component {
   unSubscribe = null;
@@ -29,9 +29,16 @@ class App extends Component {
     currentUser: null,
   };
   componentDidMount() {
-    this.unSubscribe = auth.onAuthStateChanged((user) => {
+    this.unSubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const userRef = await createUserProfileDocument(user);
+        userRef.onSnapshot((snapData) => {
+          this.setState({
+            currentUser: { id: snapData.id, ...snapData.data() },
+          });
+        });
+      }
       this.setState({ currentUser: user });
-      console.log(this.state.currentUser);
     });
   }
   componentWillUnmount() {

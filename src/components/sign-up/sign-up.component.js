@@ -40,7 +40,6 @@ const SignUp = () => {
         <TextField
           fullWidth
           className={classes.textField}
-          id="username"
           name="username"
           label="User Name"
           error={!!errors.username}
@@ -51,7 +50,6 @@ const SignUp = () => {
         <TextField
           fullWidth
           className={classes.textField}
-          id="email"
           name="email"
           label="Email"
           type="email"
@@ -62,7 +60,6 @@ const SignUp = () => {
 
         <TextField
           className={classes.textField}
-          id="password"
           name="password"
           label="Password"
           type="password"

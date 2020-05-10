@@ -41,7 +41,6 @@ const SignIn = () => {
         <TextField
           fullWidth
           className={classes.textField}
-          id="email"
           name="email"
           label="Email"
           type="email"
@@ -52,7 +51,6 @@ const SignIn = () => {
 
         <TextField
           className={classes.textField}
-          id="password"
           name="password"
           label="Password"
           type="password"
