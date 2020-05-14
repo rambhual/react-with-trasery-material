@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -19,32 +19,33 @@ import NavHeaderEx from "./components/Layout/NavHeaderEx";
 import HeaderEx from "./components/Layout/HeaderEx";
 import Home from "./pages/home";
 import { Container } from "@material-ui/core";
+import { connect } from "react-redux";
+import { setCurrentUser } from "./state/user/user-actions";
 import { ShopPage } from "./pages/shop/Shop.page";
 import Authentication from "./pages/auth/auth.page";
 import { auth, createUserProfileDocument } from "./firebase";
 
 class App extends Component {
   unSubscribe = null;
-  state = {
-    currentUser: null,
-  };
   componentDidMount() {
     this.unSubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const userRef = await createUserProfileDocument(user);
         userRef.onSnapshot((snapData) => {
-          this.setState({
-            currentUser: { id: snapData.id, ...snapData.data() },
+          this.props.setCurrentUser({
+            id: snapData.id,
+            ...snapData.data(),
           });
         });
       }
-      this.setState({ currentUser: user });
+      this.props.setCurrentUser(user);
     });
   }
   componentWillUnmount() {
     this.unSubscribe();
   }
   render() {
+    const { currentUser } = this.props;
     return (
       <Root config={defaultLayoutPreset}>
         {({ headerStyles, sidebarStyles }) => (
@@ -61,7 +62,7 @@ class App extends Component {
                 <SidebarTrigger className={headerStyles.leftTrigger}>
                   <SidebarTriggerIcon />
                 </SidebarTrigger>
-                <HeaderEx currentUser={this.state.currentUser} />
+                <HeaderEx />
               </Toolbar>
             </Header>
             <Content>
@@ -73,9 +74,14 @@ class App extends Component {
                   <Route path="/shops" exact>
                     <ShopPage />
                   </Route>
-                  <Route path="/auth/login" exact>
-                    <Authentication />
-                  </Route>
+                  <Route
+                    exact
+                    path="/auth/login"
+                    exact
+                    render={() =>
+                      currentUser ? <Redirect to="/" /> : <Authentication />
+                    }
+                  ></Route>
                 </Switch>
               </Container>
             </Content>
@@ -99,4 +105,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  currentUser: state.users.currentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

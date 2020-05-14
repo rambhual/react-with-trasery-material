@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import { isWidthUp } from "@material-ui/core/withWidth";
 import InputBase from "@material-ui/core/InputBase";
@@ -129,4 +130,8 @@ HeaderEx.defaultProps = {
   screen: null,
 };
 
-export default withStyles(styles)(HeaderEx);
+const mapStateToProps = (state) => ({
+  currentUser: state.users.currentUser,
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(HeaderEx));

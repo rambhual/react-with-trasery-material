@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm } from "react-hook-form";
-import { signInWithGoogle } from "../../firebase";
+import { signInWithGoogle, auth } from "../../firebase";
 const useStyles = makeStyles((theme) => ({
   textField: {
     display: "flex",
@@ -28,16 +28,15 @@ const SignIn = () => {
       password: "Pepperoni",
     },
   });
-
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    await auth.signInWithEmailAndPassword(email, password);
+  };
   return (
     <Box m={1} p={1} style={{ width: "50%" }}>
       <h2>I already have an account</h2>
       <span>Sign in with your email and password</span>
-      <form
-        onSubmit={handleSubmit((data) => {
-          console.log(data);
-        })}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
           fullWidth
           className={classes.textField}
@@ -66,6 +65,7 @@ const SignIn = () => {
           className={classes.button}
           startIcon={<ExitToAppIcon />}
           onClick={signInWithGoogle}
+          type="submit"
         >
           Sign In with Google
         </Button>
