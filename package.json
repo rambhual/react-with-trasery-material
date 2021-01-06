@@ -11,7 +11,7 @@
     "@material-ui/styles": "4.9.13",
     "@mui-treasury/layout": "3.3.4",
     "@mui-treasury/styles": "^1.1.6",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "clsx": "^1.1.0",
     "firebase": "^7.14.3",
     "lodash": "4.17.15",
